@@ -1,0 +1,63 @@
+* Document
+#+TITLE: Growth Charting of Brain Connectivity Networks and the Identification of Attention Impairment in Youth
+#+DATE: <2016-06-06 Mon>
+#+AUTHOR: Daniel Kessler
+#+EMAIL: kesslerd@umich.edu
+
+
+#+OPTIONS: H:3
+#+LATEX_CLASS: beamer
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+BEAMER_THEME: default
+#+BEAMER_COLOR_THEME:
+#+BEAMER_FONT_THEME:
+#+BEAMER_INNER_THEME:
+#+BEAMER_OUTER_THEME:
+#+BEAMER_HEADER:
+
+
+
+** Introduction
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+*** Motivation
+**** Left Block                                                    :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+- Left 1
+- Left 2
+- Left 3
+**** Right Block                                                   :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+1. Right 1
+2. Right 2
+3. Right 3
+*** Background
+We look at brains
+*** Other Stuff
+Is good!
+
+** Methods
+*** Sample
+- sample text
+*** Task
+- task bullet
+*** Clinical Interview
+#+BEGIN_SRC matlab
+X = y;
+#+END_SRC
+*** Preprocessing & Connectome Generation
+*** Independent Components Analysis
+*** Network Growth Charting Analyses
+** Results
+*** Network Growth Charting to Predict Task Accuracy
+*** Shifting DMN-TPN Architecture Among Maturing Components
+*** Shallow vs Lagged Dysmaturation and Task Accuracy
+*** Biomarker of Attention Dysfunction from Network Growth Charting
+*** Biomarker of ADHD from Network Growth Charting
+** Discussion
+** Conclusions
