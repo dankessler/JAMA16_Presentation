@@ -1,14 +1,14 @@
-* Document
+
 #+TITLE: Growth Charting of Brain Connectivity Networks and the Identification of Attention Impairment in Youth
-#+DATE: <2016-06-06 Mon>
+#+DATE: <2016-06-08 Wed>
 #+AUTHOR: Daniel Kessler
 #+EMAIL: kesslerd@umich.edu
+#+SUBTITLE: Published in JAMA Psychiatry, 2016 (Kessler, Sripada, & Angstadt)
 
-
-#+OPTIONS: H:3
+#+OPTIONS: H:2
 #+LATEX_CLASS: beamer
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
-#+BEAMER_THEME: default
+#+BEAMER_THEME: Frankfurt
 #+BEAMER_COLOR_THEME:
 #+BEAMER_FONT_THEME:
 #+BEAMER_INNER_THEME:
@@ -17,47 +17,86 @@
 
 
 
-** Introduction
+* Introduction
+#+LATEX: \stepcounter{subsection}
+** Motivation
+*** Pediatric Growth Charts
+- Long history for height, weight, etc
+*** Intrinsic Connectivity Networks
+- Attention & ADHD connection
+- DMN vs TPN balance
+** Background
+Focus today: processing pipeline, modeling, and analysis
+* Methods
+#+LATEX: \stepcounter{subsection}
+** Sample
+- Philadelphia Neurodevelopmental Cohort
+- Resting state fMRI
+- Penn Continuous Performance Task
+- N = 519 (after QC & exclusions)
+** Task: PCPT
+- Penn Continuous Performance Test
+- 180 trials
+- 1s to respond
+- "Go" on digit/letter (varies by phase)
+- Measure: Acc (as %age)
+** Clinical Interview
+** MRI Measures
+- T1-weighted image (structural contrast)
+- Resting State fMRI
+** Standard fMRI Prepocessing
+1. Slice-time Correction
+2. Motion Correction
+3. Normalization
+4. Smoothing
+** Slice-time Correction
+*** Car                                                             :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.4
+:BEAMER_col: .2
 :END:
-*** Motivation
-**** Left Block                                                    :BMCOL:
+#+ATTR_LATEX: :width 3cm
+[[/home/kesslerd/OrgMode/Work/jICA_JAMA_Presentation/rollingshuttercar.jpg]]
+*** Block                                                           :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.4
+:BEAMER_col: .5
 :END:
-- Left 1
-- Left 2
-- Left 3
-**** Right Block                                                   :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.6
-:END:
-1. Right 1
-2. Right 2
-3. Right 3
-*** Background
-We look at brains
-*** Other Stuff
-Is good!
+- Each fMRI volume is acquired sequentially in slices
+- Volume not acquired simultaneously
+- Correct (through interpolation) s.t. all slices w/in volume temporally aligned
+** Motion Correction
+- Participants move their head over the scan
+** Normalization
+** Smoothing
 
-** Methods
-*** Sample
-- sample text
-*** Task
-- task bullet
-*** Clinical Interview
-#+BEGIN_SRC matlab
-X = y;
-#+END_SRC
-*** Preprocessing & Connectome Generation
-*** Independent Components Analysis
-*** Network Growth Charting Analyses
-** Results
-*** Network Growth Charting to Predict Task Accuracy
-*** Shifting DMN-TPN Architecture Among Maturing Components
-*** Shallow vs Lagged Dysmaturation and Task Accuracy
-*** Biomarker of Attention Dysfunction from Network Growth Charting
-*** Biomarker of ADHD from Network Growth Charting
-** Discussion
+** Preprocessing & Connectome Generation
+*** Preprocessing
+- Linearly detrended
+- COMPCor
+- Bandpass Filtering
+- Motion Scrubbing
+*** Connectome Generation
+- Isomorphic grid
+- 12mm spacing
+- 
+- 1068 Regions of Interest (ROIs)
+** Data Cleansing
+** Preprocessing & Connectome Generation
+** Independent Components Analysis
+** Network Growth Charting Analyses
+* Results
+#+LATEX: \stepcounter{subsection}
+** Network Growth Charting to Predict Task Accuracy
+** Shifting DMN-TPN Architecture Among Maturing Components
+** Shallow vs Lagged Dysmaturation and Task Accuracy
+** Biomarker of Attention Dysfunction from Network Growth Charting
+** Biomarker of ADHD from Network Growth Charting
+* Discussion
+#+LATEX: \stepcounter{subsection}
+** Unraveling miswired connectomes
+** ICN interplay
+** Dysmaturation Predicts Dysfunction
+** Differential Dysmaturation
+* Conclusions
+#+LATEX: \stepcounter{subsection}
 ** Conclusions
+Brain network growth charting predicts attention functioning.
