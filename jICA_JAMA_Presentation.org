@@ -83,10 +83,20 @@ Focus today: processing pipeline, modeling, and analysis
 - 12mm spacing
 - 
 - 1068 Regions of Interest (ROIs)
+<<<<<<< HEAD
 *** Data Cleansing
 *** Preprocessing & Connectome Generation
 *** Independent Components Analysis
 *** Network Growth Charting Analyses
+=======
+** Data Cleansing
+\alpha
+
+$a^2=b$
+** Preprocessing & Connectome Generation
+** Independent Components Analysis
+** Network Growth Charting Analyses
+>>>>>>> 8bbc210927e9fe1ee1284ff0d59bd8e4d21397bf
 * Results
 #+LATEX: \stepcounter{subsection}
 ** Network Growth Charting to Predict Task Accuracy
