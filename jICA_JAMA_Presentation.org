@@ -44,59 +44,61 @@ Focus today: processing pipeline, modeling, and analysis
 ** MRI Measures
 - T1-weighted image (structural contrast)
 - Resting State fMRI
-** Standard fMRI Prepocessing
+*** T1 Image
+- Structural contrast
+- Ventricles are black, "gray matter" is darker, "white matter" is brither
+*** Resting state fMRI
+- 4D Image (Multiple "Volumes"): X*Y*Z*time
+- T2* contrast captures BOLD (blood oxygenation, coupled to neural activity)
+** fMRI Prepocessing Overview
+Lots of quality-control steps throughout
 1. Slice-time Correction
 2. Motion Correction
 3. Normalization
 4. Smoothing
-** Slice-time Correction
-*** Car                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: .2
-:END:
+** Preproc: Slice-time Correction
+
 #+ATTR_LATEX: :width 3cm
-[[/home/kesslerd/OrgMode/Work/jICA_JAMA_Presentation/rollingshuttercar.jpg]]
-*** Block                                                           :BMCOL:
-:PROPERTIES:
-:BEAMER_col: .5
-:END:
+[[./rollingshuttercar.jpg]]
 - Each fMRI volume is acquired sequentially in slices
 - Volume not acquired simultaneously
 - Correct (through interpolation) s.t. all slices w/in volume temporally aligned
-** Motion Correction
+** Prepoc: Motion Correction
 - Participants move their head over the scan
-*** Simulation
-#+BEGIN_SRC matlab :results file
-
-#+END_SRC
-*** Normalization
-*** Smoothing
-
-*** Preprocessing & Connectome Generation
-**** Preprocessing
+- Estimate affine realignment to common volume (e.g. V_0)
+- Alignment is progressive (rigid body transforms)
+  - realign V_1 to V_0 using affine matrix A_1
+  - align V_2 to V_0, initialize solution with A_1
+  - and so on
+- Store A_i
+- Process A_i's to capture summary displacement information for each frame
+  - this will be used later in preproccessing
+** Preproc: Normalization
+- Everybody's brain is unique
+- This is problematic for group analyses
+- Standard Brain/Space: MNI (Montreal Neurological Institute)
+- Steps
+  1. Rigid body registration of T1 scan to T2* scan
+  2. Estimate nonlinear warp (affine + splines) b/w T1 and MNI template
+  3. Apply estimated warp to each volume of T2* scan
+** Preproc: Smoothing
+- Normalization isn't perfect
+- Brain's are plastic and diverse even when perfectly aligned anyway
+- Smooth with Gaussian kernel (3D, 8mm FWHM)
+** Resting Processing & Connectome Generation
+*** Processing
 - Linearly detrended
-- COMPCor
+- COMPCor: PCA on nuisance regions (CSF & WM), regress out of GM
 - Bandpass Filtering
-- Motion Scrubbing
-**** Connectome Generation
-- Isomorphic grid
-- 12mm spacing
-- 
+- Motion Scrubbing: Delete volumes with large displacement/motion
+*** Connectome Generation
+- Isomorphic grid, 12mm spacing
 - 1068 Regions of Interest (ROIs)
-<<<<<<< HEAD
-*** Data Cleansing
-*** Preprocessing & Connectome Generation
-*** Independent Components Analysis
-*** Network Growth Charting Analyses
-=======
+- Calculate pairwise correlation, then R-to-Z transform
+- Vector embedding: Each participant contributes ${1068}\choose{2}$ edges
 ** Data Cleansing
-\alpha
-
-$a^2=b$
-** Preprocessing & Connectome Generation
 ** Independent Components Analysis
 ** Network Growth Charting Analyses
->>>>>>> 8bbc210927e9fe1ee1284ff0d59bd8e4d21397bf
 * Results
 #+LATEX: \stepcounter{subsection}
 ** Network Growth Charting to Predict Task Accuracy

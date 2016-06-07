@@ -1,4 +1,4 @@
-% Created 2016-06-07 Tue 14:37
+% Created 2016-06-07 Tue 17:23
 \documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -61,7 +61,7 @@
 Focus today: processing pipeline, modeling, and analysis
 \end{frame}
 \section{Methods}
-\label{sec:orgheadline15}
+\label{sec:orgheadline17}
 \stepcounter{subsection}
 \begin{frame}[label={sec:orgheadline4}]{Sample}
 \begin{itemize}
@@ -87,8 +87,21 @@ Focus today: processing pipeline, modeling, and analysis
 \item T1-weighted image (structural contrast)
 \item Resting State fMRI
 \end{itemize}
+\begin{block}{T1 Image}
+\begin{itemize}
+\item Structural contrast
+\item Ventricles are black, "gray matter" is darker, "white matter" is brither
+\end{itemize}
+\end{block}
+\begin{block}{Resting state fMRI}
+\begin{itemize}
+\item 4D Image (Multiple "Volumes"): X*Y*Z*time
+\item T2* contrast captures BOLD (blood oxygenation, coupled to neural activity)
+\end{itemize}
+\end{block}
 \end{frame}
-\begin{frame}[label={sec:orgheadline8}]{Standard fMRI Prepocessing}
+\begin{frame}[label={sec:orgheadline8}]{fMRI Prepocessing Overview}
+Lots of quality-control steps throughout
 \begin{enumerate}
 \item Slice-time Correction
 \item Motion Correction
@@ -96,101 +109,107 @@ Focus today: processing pipeline, modeling, and analysis
 \item Smoothing
 \end{enumerate}
 \end{frame}
-\begin{frame}[label={sec:orgheadline9}]{Slice-time Correction}
-\begin{columns}
-\begin{column}{.2\columnwidth}
-\includegraphics[width=3cm]{/home/kesslerd/OrgMode/Work/jICA_JAMA_Presentation/rollingshuttercar.jpg}
-\end{column}
-\begin{column}{.5\columnwidth}
+\begin{frame}[label={sec:orgheadline9}]{Preproc: Slice-time Correction}
+\includegraphics[width=3cm]{./rollingshuttercar.jpg}
 \begin{itemize}
 \item Each fMRI volume is acquired sequentially in slices
 \item Volume not acquired simultaneously
 \item Correct (through interpolation) s.t. all slices w/in volume temporally aligned
 \end{itemize}
-\end{column}
-\end{columns}
 \end{frame}
-\begin{frame}[fragile,label={sec:orgheadline10}]{Motion Correction}
- \begin{itemize}
+\begin{frame}[label={sec:orgheadline10}]{Prepoc: Motion Correction}
+\begin{itemize}
 \item Participants move their head over the scan
+\item Estimate affine realignment to common volume (e.g. V\(_{\text{0}}\))
+\item Alignment is progressive (rigid body transforms)
+\begin{itemize}
+\item realign V\(_{\text{1}}\) to V\(_{\text{0}}\) using affine matrix A\(_{\text{1}}\)
+\item align V\(_{\text{2}}\) to V\(_{\text{0}}\), initialize solution with A\(_{\text{1}}\)
+\item and so on
 \end{itemize}
-\begin{block}{Simulation}
-\end{block}
-\begin{block}{Normalization}
-\end{block}
-\begin{block}{Smoothing}
-\end{block}
-
-\begin{block}{Preprocessing \& Connectome Generation}
-\begin{block}{Preprocessing}
+\item Store A\(_{\text{i}}\)
+\item Process A\(_{\text{i}}\)'s to capture summary displacement information for each frame
+\begin{itemize}
+\item this will be used later in preproccessing
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}[label={sec:orgheadline11}]{Preproc: Normalization}
+\begin{itemize}
+\item Everybody's brain is unique
+\item This is problematic for group analyses
+\item Standard Brain/Space: MNI (Montreal Neurological Institute)
+\item Steps
+\begin{enumerate}
+\item Rigid body registration of T1 scan to T2* scan
+\item Estimate nonlinear warp (affine + splines) b/w T1 and MNI template
+\item Apply estimated warp to each volume of T2* scan
+\end{enumerate}
+\end{itemize}
+\end{frame}
+\begin{frame}[label={sec:orgheadline12}]{Preproc: Smoothing}
+\begin{itemize}
+\item Normalization isn't perfect
+\item Brain's are plastic and diverse even when perfectly aligned anyway
+\item Smooth with Gaussian kernel (3D, 8mm FWHM)
+\end{itemize}
+\end{frame}
+\begin{frame}[label={sec:orgheadline13}]{Resting Processing \& Connectome Generation}
+\begin{block}{Processing}
 \begin{itemize}
 \item Linearly detrended
-\item COMPCor
+\item COMPCor: PCA on nuisance regions (CSF \& WM), regress out of GM
 \item Bandpass Filtering
-\item Motion Scrubbing
+\item Motion Scrubbing: Delete volumes with large displacement/motion
 \end{itemize}
 \end{block}
 \begin{block}{Connectome Generation}
 \begin{itemize}
-\item Isomorphic grid
-\item 12mm spacing
-\item 
-
+\item Isomorphic grid, 12mm spacing
 \item 1068 Regions of Interest (ROIs)
+\item Calculate pairwise correlation, then R-to-Z transform
 \end{itemize}
-<<<<<<< HEAD
 \end{block}
-\end{block}
-\begin{block}{Data Cleansing}
-\end{block}
-\begin{block}{Preprocessing \& Connectome Generation}
-\end{block}
-\begin{block}{Independent Components Analysis}
-\end{block}
-\begin{block}{Network Growth Charting Analyses}
-\texttt{=====}
+\begin{block}{Vector Embedding}
+\begin{itemize}
+\item Each participant contributes \({1068}\choose{2}\) edges
+\end{itemize}
 \end{block}
 \end{frame}
-\begin{frame}[label={sec:orgheadline11}]{Data Cleansing}
-\(\alpha\)
-
-\(a^2=b\)
+\begin{frame}[label={sec:orgheadline14}]{Data Cleansing}
 \end{frame}
-\begin{frame}[label={sec:orgheadline12}]{Preprocessing \& Connectome Generation}
+\begin{frame}[label={sec:orgheadline15}]{Independent Components Analysis}
 \end{frame}
-\begin{frame}[label={sec:orgheadline13}]{Independent Components Analysis}
-\end{frame}
-\begin{frame}[label={sec:orgheadline14}]{Network Growth Charting Analyses}
->>>>>>> 8bbc210927e9fe1ee1284ff0d59bd8e4d21397bf
+\begin{frame}[label={sec:orgheadline16}]{Network Growth Charting Analyses}
 \end{frame}
 \section{Results}
-\label{sec:orgheadline21}
+\label{sec:orgheadline23}
 \stepcounter{subsection}
-\begin{frame}[label={sec:orgheadline16}]{Network Growth Charting to Predict Task Accuracy}
+\begin{frame}[label={sec:orgheadline18}]{Network Growth Charting to Predict Task Accuracy}
 \end{frame}
-\begin{frame}[label={sec:orgheadline17}]{Shifting DMN-TPN Architecture Among Maturing Components}
+\begin{frame}[label={sec:orgheadline19}]{Shifting DMN-TPN Architecture Among Maturing Components}
 \end{frame}
-\begin{frame}[label={sec:orgheadline18}]{Shallow vs Lagged Dysmaturation and Task Accuracy}
+\begin{frame}[label={sec:orgheadline20}]{Shallow vs Lagged Dysmaturation and Task Accuracy}
 \end{frame}
-\begin{frame}[label={sec:orgheadline19}]{Biomarker of Attention Dysfunction from Network Growth Charting}
+\begin{frame}[label={sec:orgheadline21}]{Biomarker of Attention Dysfunction from Network Growth Charting}
 \end{frame}
-\begin{frame}[label={sec:orgheadline20}]{Biomarker of ADHD from Network Growth Charting}
+\begin{frame}[label={sec:orgheadline22}]{Biomarker of ADHD from Network Growth Charting}
 \end{frame}
 \section{Discussion}
-\label{sec:orgheadline26}
-\stepcounter{subsection}
-\begin{frame}[label={sec:orgheadline22}]{Unraveling miswired connectomes}
-\end{frame}
-\begin{frame}[label={sec:orgheadline23}]{ICN interplay}
-\end{frame}
-\begin{frame}[label={sec:orgheadline24}]{Dysmaturation Predicts Dysfunction}
-\end{frame}
-\begin{frame}[label={sec:orgheadline25}]{Differential Dysmaturation}
-\end{frame}
-\section{Conclusions}
 \label{sec:orgheadline28}
 \stepcounter{subsection}
-\begin{frame}[label={sec:orgheadline27}]{Conclusions}
+\begin{frame}[label={sec:orgheadline24}]{Unraveling miswired connectomes}
+\end{frame}
+\begin{frame}[label={sec:orgheadline25}]{ICN interplay}
+\end{frame}
+\begin{frame}[label={sec:orgheadline26}]{Dysmaturation Predicts Dysfunction}
+\end{frame}
+\begin{frame}[label={sec:orgheadline27}]{Differential Dysmaturation}
+\end{frame}
+\section{Conclusions}
+\label{sec:orgheadline30}
+\stepcounter{subsection}
+\begin{frame}[label={sec:orgheadline29}]{Conclusions}
 Brain network growth charting predicts attention functioning.
 \end{frame}
 \end{document}
