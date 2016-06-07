@@ -80,6 +80,9 @@ Focus today: processing pipeline, modeling, and analysis
 - 
 - 1068 Regions of Interest (ROIs)
 ** Data Cleansing
+\alpha
+
+$a^2=b$
 ** Preprocessing & Connectome Generation
 ** Independent Components Analysis
 ** Network Growth Charting Analyses
