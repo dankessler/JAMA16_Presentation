@@ -65,24 +65,28 @@ Focus today: processing pipeline, modeling, and analysis
 - Correct (through interpolation) s.t. all slices w/in volume temporally aligned
 ** Motion Correction
 - Participants move their head over the scan
-** Normalization
-** Smoothing
+*** Simulation
+#+BEGIN_SRC matlab :results file
 
-** Preprocessing & Connectome Generation
-*** Preprocessing
+#+END_SRC
+*** Normalization
+*** Smoothing
+
+*** Preprocessing & Connectome Generation
+**** Preprocessing
 - Linearly detrended
 - COMPCor
 - Bandpass Filtering
 - Motion Scrubbing
-*** Connectome Generation
+**** Connectome Generation
 - Isomorphic grid
 - 12mm spacing
 - 
 - 1068 Regions of Interest (ROIs)
-** Data Cleansing
-** Preprocessing & Connectome Generation
-** Independent Components Analysis
-** Network Growth Charting Analyses
+*** Data Cleansing
+*** Preprocessing & Connectome Generation
+*** Independent Components Analysis
+*** Network Growth Charting Analyses
 * Results
 #+LATEX: \stepcounter{subsection}
 ** Network Growth Charting to Predict Task Accuracy
