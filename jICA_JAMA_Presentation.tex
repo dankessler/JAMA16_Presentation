@@ -1,4 +1,4 @@
-% Created 2016-06-07 Tue 17:23
+% Created 2016-06-07 Tue 18:26
 \documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -77,10 +77,15 @@ Focus today: processing pipeline, modeling, and analysis
 \item 180 trials
 \item 1s to respond
 \item "Go" on digit/letter (varies by phase)
-\item Measure: Acc (as \%age)
+\item Measure: Acc (corrected for age with quadratic model)
 \end{itemize}
 \end{frame}
 \begin{frame}[label={sec:orgheadline6}]{Clinical Interview}
+\begin{itemize}
+\item Assesses psychopathology dimensions
+\item ADHD Module
+\item Symptom endorsement -> pseudo ADHD "diagnosis"
+\end{itemize}
 \end{frame}
 \begin{frame}[label={sec:orgheadline7}]{MRI Measures}
 \begin{itemize}
@@ -158,8 +163,8 @@ Lots of quality-control steps throughout
 \begin{block}{Processing}
 \begin{itemize}
 \item Linearly detrended
-\item COMPCor: PCA on nuisance regions (CSF \& WM), regress out of GM
-\item Bandpass Filtering
+\item COMPCor: PCA-based nuisance regression (CSF \& WM)
+\item Bandpass Filtering (0.01 to 0.1 Hz)
 \item Motion Scrubbing: Delete volumes with large displacement/motion
 \end{itemize}
 \end{block}
@@ -168,19 +173,43 @@ Lots of quality-control steps throughout
 \item Isomorphic grid, 12mm spacing
 \item 1068 Regions of Interest (ROIs)
 \item Calculate pairwise correlation, then R-to-Z transform
-\end{itemize}
-\end{block}
-\begin{block}{Vector Embedding}
-\begin{itemize}
-\item Each participant contributes \({1068}\choose{2}\) edges
+\item Vector embedding: Each participant contributes \({1068}\choose{2}\) edges
 \end{itemize}
 \end{block}
 \end{frame}
 \begin{frame}[label={sec:orgheadline14}]{Data Cleansing}
+\begin{itemize}
+\item Intersubject nuisance effects may manifest at edge level
+\item e.g.: left handers have > connectivity at edge i
+\item Concatenate vector embeddings into matrix X
+\item estimate with OLS \(X = Y\hat{\beta} + \hat{\epsilon}\)
+\item Reestimate data as \(X^{\dagger} = Y^{\dagger}\hat{\beta}\)
+\item Y\(^{\textdagger{}}\) is ideal design matrix where nuisance fx are flat
+\item Induce eigenvector selection through augmentation: add \(hat{\beta}\) for fx of interest at each edge
+\end{itemize}
 \end{frame}
 \begin{frame}[label={sec:orgheadline15}]{Independent Components Analysis}
+\begin{itemize}
+\item reduce rows of \(X^{\dagger}\) through PCA (\(DX\)) (retain top 15 eigenvectors)
+\item ICA-decomposition using FastICA \(X=AS\)
+\item A: mixing matrix 15 by 15
+\item S: source matrix: 15 by \({1068}\choose{2}\)
+\item Unreduce \(A^{\dagger}=D^{-1}A\)
+\item \(A^{\dagger}\) is \# of subjects by 15
+\item The i,j element indicates the expression of component j for subject i
+\end{itemize}
 \end{frame}
 \begin{frame}[label={sec:orgheadline16}]{Network Growth Charting Analyses}
+\begin{itemize}
+\item Growth charts obtained from OLS population-level estimates
+\item Predict each column of A with OLS \(A^{\dagger}_i = age + age^2\)
+\item Residuals from these models are \alert{deviation scores} reflecting over- or under- expression of a component relative to age
+\item Use \alert{deviation scores} to predict
+\begin{itemize}
+\item Accuracy on PCPT (age-corrected)
+\item ADHD status
+\end{itemize}
+\end{itemize}
 \end{frame}
 \section{Results}
 \label{sec:orgheadline23}

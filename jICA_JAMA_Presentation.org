@@ -39,8 +39,11 @@ Focus today: processing pipeline, modeling, and analysis
 - 180 trials
 - 1s to respond
 - "Go" on digit/letter (varies by phase)
-- Measure: Acc (as %age)
+- Measure: Acc (corrected for age with quadratic model)
 ** Clinical Interview
+- Assesses psychopathology dimensions
+- ADHD Module
+- Symptom endorsement -> pseudo ADHD "diagnosis"
 ** MRI Measures
 - T1-weighted image (structural contrast)
 - Resting State fMRI
@@ -67,11 +70,11 @@ Lots of quality-control steps throughout
 - Participants move their head over the scan
 - Estimate affine realignment to common volume (e.g. V_0)
 - Alignment is progressive (rigid body transforms)
-  - realign V_1 to V_0 using affine matrix A_1
-  - align V_2 to V_0, initialize solution with A_1
+  - realign V_1 to V_0 using affine matrix Q_1
+  - align V_2 to V_0, initialize solution with Q_1
   - and so on
-- Store A_i
-- Process A_i's to capture summary displacement information for each frame
+- Store Q_i
+- Process Q_i's to capture summary displacement information for each frame
   - this will be used later in preproccessing
 ** Preproc: Normalization
 - Everybody's brain is unique
@@ -83,13 +86,13 @@ Lots of quality-control steps throughout
   3. Apply estimated warp to each volume of T2* scan
 ** Preproc: Smoothing
 - Normalization isn't perfect
-- Brain's are plastic and diverse even when perfectly aligned anyway
+- Brains are plastic and diverse even when perfectly aligned anyway
 - Smooth with Gaussian kernel (3D, 8mm FWHM)
 ** Resting Processing & Connectome Generation
 *** Processing
 - Linearly detrended
-- COMPCor: PCA on nuisance regions (CSF & WM), regress out of GM
-- Bandpass Filtering
+- COMPCor: PCA-based nuisance regression (CSF & WM)
+- Bandpass Filtering (0.01 to 0.1 Hz)
 - Motion Scrubbing: Delete volumes with large displacement/motion
 *** Connectome Generation
 - Isomorphic grid, 12mm spacing
@@ -97,13 +100,48 @@ Lots of quality-control steps throughout
 - Calculate pairwise correlation, then R-to-Z transform
 - Vector embedding: Each participant contributes ${1068}\choose{2}$ edges
 ** Data Cleansing
+- Intersubject nuisance effects may manifest at edge level
+- e.g.: left handers have > connectivity at edge i
+- Concatenate vector embeddings into matrix X
+- estimate with OLS $X = Y\hat{\beta} + \hat{\epsilon}$
+- Reestimate data as $X^{\dagger} = Y^{\dagger}\hat{\beta}$
+- Y^{\dagger} is ideal design matrix where nuisance fx are flat
+- Induce eigenvector selection through augmentation: add $\hat{\beta}$ for fx of interest at each edge
 ** Independent Components Analysis
+- reduce rows of $X^{\dagger}$ through PCA ($DX$) (retain top 15 eigenvectors)
+- ICA-decomposition using FastICA $X=AS$
+- A: mixing matrix 15 by 15
+- S: source matrix: 15 by ${1068}\choose{2}$
+- Unreduce $A^{\dagger}=D^{-1}A$
+- $A^{\dagger}$ is # of subjects by 15
+- The i,j element indicates the expression of component j for subject i
 ** Network Growth Charting Analyses
+- Growth charts obtained from OLS population-level estimates
+- Predict each column of A with OLS $A^{\dagger}_i = age + age^2$
+- Residuals from these models are *deviation scores* reflecting over- or under- expression of a component relative to age
+- Use *deviation scores* to predict
+  - Accuracy on PCPT (age-corrected)
+  - ADHD status
 * Results
 #+LATEX: \stepcounter{subsection}
 ** Network Growth Charting to Predict Task Accuracy
+- *Deviation scores* predict accuracy very well (R^2 = 0.287)
+- A subset of just 6 components' *deviation scores* do most of the work (R^2 = 0.240)
+- Of these, 5 show vigorous maturational profiles
+- Split half analysis, OLS with all 15 *deviation scores*: R^2 = 0.176
 ** Shifting DMN-TPN Architecture Among Maturing Components
+
 ** Shallow vs Lagged Dysmaturation and Task Accuracy
+Two Alternative Forms of Dysmaturation
+PIC HERE
+*** Shallow                                                         :BMCOL:
+:PROPERTIES:
+:BEAMER_col: .5
+:END:
+*** Lagged                                                          :BMCOL:
+:PROPERTIES:
+:BEAMER_col: .5
+:END:
 ** Biomarker of Attention Dysfunction from Network Growth Charting
 ** Biomarker of ADHD from Network Growth Charting
 * Discussion
