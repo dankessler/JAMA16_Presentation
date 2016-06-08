@@ -1,4 +1,4 @@
-% Created 2016-06-07 Tue 22:25
+% Created 2016-06-08 Wed 09:22
 \documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -58,12 +58,26 @@
 \end{block}
 \end{frame}
 \begin{frame}[label={sec:orgheadline2}]{Background}
-Focus today: processing pipeline, modeling, and analysis
+\begin{itemize}
+\item Focus today: processing pipeline, modeling, and analysis
+\item Slides: linked from \url{http:dankessler.me}
+\item Paper: \href{http://archpsyc.jamanetwork.com/article.aspx?articleid=2513687}{Kessler, Angstadt, \& Sripada. JAMA Psychiatry 2016}
+\end{itemize}
 \end{frame}
 \section{Methods}
-\label{sec:orgheadline17}
+\label{sec:orgheadline19}
 \stepcounter{subsection}
-\begin{frame}[label={sec:orgheadline4}]{Sample}
+\begin{frame}[label={sec:orgheadline4}]{Method Overview}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=7.75cm]{./Figures/Figure1.png}
+\end{figure}
+\end{frame}
+\begin{frame}[label={sec:orgheadline5}]{Sample}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=4cm]{./Figures/PNC.png}
+\end{figure}
 \begin{itemize}
 \item Philadelphia Neurodevelopmental Cohort
 \item Resting state fMRI
@@ -71,7 +85,8 @@ Focus today: processing pipeline, modeling, and analysis
 \item N = 519 (after QC \& exclusions)
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orgheadline5}]{Task: PCPT}
+
+\begin{frame}[label={sec:orgheadline6}]{Task: PCPT}
 \begin{itemize}
 \item Penn Continuous Performance Test
 \item 180 trials
@@ -80,14 +95,14 @@ Focus today: processing pipeline, modeling, and analysis
 \item Measure: Acc (corrected for age with quadratic model)
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orgheadline6}]{Clinical Interview}
+\begin{frame}[label={sec:orgheadline7}]{Clinical Interview}
 \begin{itemize}
 \item Assesses psychopathology dimensions
 \item ADHD Module
 \item Symptom endorsement -> pseudo ADHD "diagnosis"
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orgheadline7}]{MRI Measures}
+\begin{frame}[label={sec:orgheadline8}]{MRI Measures}
 \begin{itemize}
 \item T1-weighted image (structural contrast)
 \item Resting State fMRI
@@ -105,7 +120,7 @@ Focus today: processing pipeline, modeling, and analysis
 \end{itemize}
 \end{block}
 \end{frame}
-\begin{frame}[label={sec:orgheadline8}]{fMRI Prepocessing Overview}
+\begin{frame}[label={sec:orgheadline9}]{fMRI Prepocessing Overview}
 Lots of quality-control steps throughout
 \begin{enumerate}
 \item Slice-time Correction
@@ -114,15 +129,15 @@ Lots of quality-control steps throughout
 \item Smoothing
 \end{enumerate}
 \end{frame}
-\begin{frame}[label={sec:orgheadline9}]{Preproc: Slice-time Correction}
-\includegraphics[width=3cm]{./rollingshuttercar.jpg}
+\begin{frame}[label={sec:orgheadline10}]{Preproc: Slice-time Correction}
+\includegraphics[width=3cm]{./Figures/rollingshuttercar.jpg}
 \begin{itemize}
 \item Each fMRI volume is acquired sequentially in slices
 \item Volume not acquired simultaneously
 \item Correct (through interpolation) s.t. all slices w/in volume temporally aligned
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orgheadline10}]{Prepoc: Motion Correction}
+\begin{frame}[label={sec:orgheadline11}]{Prepoc: Motion Correction}
 \begin{itemize}
 \item Participants move their head over the scan
 \item Estimate affine realignment to common volume (e.g. V\(_{\text{0}}\))
@@ -139,7 +154,7 @@ Lots of quality-control steps throughout
 \end{itemize}
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orgheadline11}]{Preproc: Normalization}
+\begin{frame}[label={sec:orgheadline12}]{Preproc: Normalization}
 \begin{itemize}
 \item Everybody's brain is unique
 \item This is problematic for group analyses
@@ -152,14 +167,14 @@ Lots of quality-control steps throughout
 \end{enumerate}
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orgheadline12}]{Preproc: Smoothing}
+\begin{frame}[label={sec:orgheadline13}]{Preproc: Smoothing}
 \begin{itemize}
 \item Normalization isn't perfect
 \item Brains are plastic and diverse even when perfectly aligned anyway
 \item Smooth with Gaussian kernel (3D, 8mm FWHM)
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orgheadline13}]{Resting Processing \& Connectome Generation}
+\begin{frame}[label={sec:orgheadline14}]{Resting Processing \& Connectome Generation}
 \begin{block}{Processing}
 \begin{itemize}
 \item Linearly detrended
@@ -177,7 +192,7 @@ Lots of quality-control steps throughout
 \end{itemize}
 \end{block}
 \end{frame}
-\begin{frame}[label={sec:orgheadline14}]{Data Cleansing}
+\begin{frame}[label={sec:orgheadline15}]{Data Cleansing}
 \begin{itemize}
 \item Intersubject nuisance effects may manifest at edge level
 \item e.g.: left handers have > connectivity at edge i
@@ -188,7 +203,7 @@ Lots of quality-control steps throughout
 \item Induce eigenvector selection through augmentation: add \(\hat{\beta}\) for fx of interest at each edge
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orgheadline15}]{Independent Components Analysis}
+\begin{frame}[label={sec:orgheadline16}]{Independent Components Analysis}
 \begin{itemize}
 \item reduce rows of \(X^{\dagger}\) through PCA (\(DX\)) (retain top 15 eigenvectors)
 \item ICA-decomposition using FastICA \(X=AS\)
@@ -199,7 +214,20 @@ Lots of quality-control steps throughout
 \item The i,j element indicates the expression of component j for subject i
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orgheadline16}]{Network Growth Charting Analyses}
+\begin{frame}[label={sec:orgheadline17}]{Network Assignment \& Visualization}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=6cm]{./Figures/Yeo1.png}
+\end{figure}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=1.5cm]{./Figures/Yeo2.png}
+\end{figure}
+
+Buckner et al. Opportunities and limitations of intrinsic functional connectivity MRI. Nature Publishing Group (2013) vol. 16 (7) pp. 832-837
+\end{frame}
+
+\begin{frame}[label={sec:orgheadline18}]{Network Growth Charting Analyses}
 \begin{itemize}
 \item Growth charts obtained from OLS population-level estimates
 \item Predict each column of A with OLS \(A^{\dagger}_i = age + age^2\)
@@ -212,9 +240,9 @@ Lots of quality-control steps throughout
 \end{itemize}
 \end{frame}
 \section{Results}
-\label{sec:orgheadline23}
+\label{sec:orgheadline25}
 \stepcounter{subsection}
-\begin{frame}[label={sec:orgheadline18}]{Network Growth Charting to Predict Task Accuracy}
+\begin{frame}[label={sec:orgheadline20}]{Network Growth Charting to Predict Task Accuracy}
 \begin{itemize}
 \item \alert{Deviation scores} predict accuracy very well (R\(^{\text{2}}\) = 0.287)
 \item A subset of just 6 components' \alert{deviation scores} do most of the work (R\(^{\text{2}}\) = 0.240)
@@ -223,19 +251,19 @@ Lots of quality-control steps throughout
 \end{itemize}
 \begin{figure}[htb]
 \centering
-\includegraphics[height=3cm]{./Figure3.png}
+\includegraphics[height=3cm]{./Figures/Figure3.png}
 \end{figure}
 \end{frame}
-\begin{frame}[label={sec:orgheadline19}]{DMN-TPN Shifts in Maturing Components}
+\begin{frame}[label={sec:orgheadline21}]{DMN-TPN Shifts in Maturing Components}
 \begin{figure}[htb]
 \centering
-\includegraphics[height=7.75cm]{./Figure2.png}
+\includegraphics[height=7.75cm]{./Figures/Figure2.png}
 \end{figure}
 \end{frame}
-\begin{frame}[label={sec:orgheadline20}]{Shallow vs Lagged Dysmaturation and Task Accuracy}
+\begin{frame}[label={sec:orgheadline22}]{Shallow vs Lagged Dysmaturation and Task Accuracy}
 \begin{figure}[htb]
 \centering
-\includegraphics[height=4cm]{./eFig7.png}
+\includegraphics[height=4cm]{./Figures/eFig7.png}
 \end{figure}
 \begin{columns}
 \begin{column}{.5\columnwidth}
@@ -251,7 +279,7 @@ Dysmaturation yields comparable, but right-shifted, peak
 Likelihood Ratio > 10\(^{\text{26}}\)
 \end{block}
 \end{frame}
-\begin{frame}[label={sec:orgheadline21}]{Biomarker of Attention Dysfunction from Network Growth Charting}
+\begin{frame}[label={sec:orgheadline23}]{Biomarker of Attention Dysfunction from Network Growth Charting}
 \begin{itemize}
 \item Goal: Binary Classification of Attention Dysfunction
 \item Binarize task performance into \emph{low} and \emph{normal} performers (split by \%ile cutoff)
@@ -260,10 +288,10 @@ Likelihood Ratio > 10\(^{\text{26}}\)
 \end{itemize}
 \begin{figure}[htb]
 \centering
-\includegraphics[height=3cm]{./Figure4.png}
+\includegraphics[height=3cm]{./Figures/Figure4.png}
 \end{figure}
 \end{frame}
-\begin{frame}[label={sec:orgheadline22}]{Biomarker of ADHD from Network Growth Charting}
+\begin{frame}[label={sec:orgheadline24}]{Biomarker of ADHD from Network Growth Charting}
 \begin{itemize}
 \item Goal: Binary Classification of Pseudo ADHD Diagnosis
 \item Logistic regression predicting dx using 6 components IDed earlier
@@ -272,12 +300,21 @@ Likelihood Ratio > 10\(^{\text{26}}\)
 \end{itemize}
 \end{frame}
 \section{Discussion}
-\label{sec:orgheadline24}
+\label{sec:orgheadline27}
 \stepcounter{subsection}
+\begin{frame}[label={sec:orgheadline26}]{Discussion}
 \begin{itemize}
 \item Recent review paper calls for developmental approaches to connectomic imaging
 \item We link dysmaturation of ICN topology to attention dysfunction
 \item DMN-TPN intra- and inter-relationships implicated
 \item Shallow vs lagged dysmaturation provides better predictive fit
+\end{itemize}
+\end{frame}
+\section{Acknowledgements}
+\label{sec:orgheadline28}
+\begin{itemize}
+\item Chandra Sripada (PI)
+\item Mike Angstadt (Research Computer Specialist)
+\item Yu Fang (Processing)
 \end{itemize}
 \end{document}

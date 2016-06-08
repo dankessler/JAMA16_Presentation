@@ -26,14 +26,22 @@
 - Attention & ADHD connection
 - DMN vs TPN balance
 ** Background
-Focus today: processing pipeline, modeling, and analysis
+- Focus today: processing pipeline, modeling, and analysis
+- Slides: linked from [[http:dankessler.me]]
+- Paper: [[http://archpsyc.jamanetwork.com/article.aspx?articleid=2513687][Kessler, Angstadt, & Sripada. JAMA Psychiatry 2016]]
 * Methods
 #+LATEX: \stepcounter{subsection}
+** Method Overview
+#+ATTR_LATEX: :height 7.75cm :float t
+[[./Figures/Figure1.png]]
 ** Sample
+#+ATTR_LATEX: :height 4cm :float t
+[[./Figures/PNC.png]]
 - Philadelphia Neurodevelopmental Cohort
 - Resting state fMRI
 - Penn Continuous Performance Task
 - N = 519 (after QC & exclusions)
+
 ** Task: PCPT
 - Penn Continuous Performance Test
 - 180 trials
@@ -62,7 +70,7 @@ Lots of quality-control steps throughout
 ** Preproc: Slice-time Correction
 
 #+ATTR_LATEX: :width 3cm
-[[./rollingshuttercar.jpg]]
+[[./Figures/rollingshuttercar.jpg]]
 - Each fMRI volume is acquired sequentially in slices
 - Volume not acquired simultaneously
 - Correct (through interpolation) s.t. all slices w/in volume temporally aligned
@@ -115,6 +123,14 @@ Lots of quality-control steps throughout
 - Unreduce $A^{\dagger}=D^{-1}A$
 - $A^{\dagger}$ is # of subjects by 15
 - The i,j element indicates the expression of component j for subject i
+** Network Assignment & Visualization
+#+ATTR_LATEX: :height 6cm :float t
+[[./Figures/Yeo1.png]]
+#+ATTR_LATEX: :height 1.5cm :float t
+[[./Figures/Yeo2.png]]
+
+Buckner et al. Opportunities and limitations of intrinsic functional connectivity MRI. Nature Publishing Group (2013) vol. 16 (7) pp. 832-837
+
 ** Network Growth Charting Analyses
 - Growth charts obtained from OLS population-level estimates
 - Predict each column of A with OLS $A^{\dagger}_i = age + age^2$
@@ -130,13 +146,13 @@ Lots of quality-control steps throughout
 - Of these, 5 show vigorous maturational profiles
 - Split half analysis, OLS with all 15 *deviation scores*: R^2 = 0.176
 #+ATTR_LATEX: :height 3cm :float t
-[[./Figure3.png]]
+[[./Figures/Figure3.png]]
 ** DMN-TPN Shifts in Maturing Components
 #+ATTR_LATEX: :height 7.75cm :float t
-[[./Figure2.png]]
+[[./Figures/Figure2.png]]
 ** Shallow vs Lagged Dysmaturation and Task Accuracy
 #+ATTR_LATEX: :height 4cm :float t
-[[./eFig7.png]]
+[[./Figures/eFig7.png]]
 *** Shallow                                                         :BMCOL:
 :PROPERTIES:
 :BEAMER_col: .5
@@ -157,7 +173,7 @@ Likelihood Ratio > 10^26
 - Vary %ile cutoff for binning
 - LOOCV of Logistic Regression, performance assessed with ROC AUC, error bars from permutations
 #+ATTR_LATEX: :height 3cm :float t
-[[./Figure4.png]]
+[[./Figures/Figure4.png]]
 ** Biomarker of ADHD from Network Growth Charting
 - Goal: Binary Classification of Pseudo ADHD Diagnosis
 - Logistic regression predicting dx using 6 components IDed earlier
@@ -165,7 +181,12 @@ Likelihood Ratio > 10^26
 - $\chi^2_6 = 13.00; P = 0.043$
 * Discussion
 #+LATEX: \stepcounter{subsection}
+** Discussion
 - Recent review paper calls for developmental approaches to connectomic imaging
 - We link dysmaturation of ICN topology to attention dysfunction
 - DMN-TPN intra- and inter-relationships implicated
 - Shallow vs lagged dysmaturation provides better predictive fit
+* Acknowledgements
+- Chandra Sripada (PI)
+- Mike Angstadt (Research Computer Specialist)
+- Yu Fang (Processing)
