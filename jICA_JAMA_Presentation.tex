@@ -1,4 +1,4 @@
-% Created 2016-06-08 Wed 09:22
+% Created 2016-06-08 Wed 09:27
 \documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -85,11 +85,9 @@
 \item N = 519 (after QC \& exclusions)
 \end{itemize}
 \end{frame}
-
 \begin{frame}[label={sec:orgheadline6}]{Task: PCPT}
 \begin{itemize}
 \item Penn Continuous Performance Test
-\item 180 trials
 \item 1s to respond
 \item "Go" on digit/letter (varies by phase)
 \item Measure: Acc (corrected for age with quadratic model)
@@ -130,7 +128,10 @@ Lots of quality-control steps throughout
 \end{enumerate}
 \end{frame}
 \begin{frame}[label={sec:orgheadline10}]{Preproc: Slice-time Correction}
-\includegraphics[width=3cm]{./Figures/rollingshuttercar.jpg}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=4cm]{./Figures/rollingshuttercar.jpg}
+\end{figure}
 \begin{itemize}
 \item Each fMRI volume is acquired sequentially in slices
 \item Volume not acquired simultaneously
@@ -311,10 +312,13 @@ Likelihood Ratio > 10\(^{\text{26}}\)
 \end{itemize}
 \end{frame}
 \section{Acknowledgements}
-\label{sec:orgheadline28}
+\label{sec:orgheadline29}
+\stepcounter{subsection}
+\begin{frame}[label={sec:orgheadline28}]{Acknowledgements}
 \begin{itemize}
 \item Chandra Sripada (PI)
 \item Mike Angstadt (Research Computer Specialist)
 \item Yu Fang (Processing)
 \end{itemize}
+\end{frame}
 \end{document}

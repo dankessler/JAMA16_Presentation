@@ -41,10 +41,8 @@
 - Resting state fMRI
 - Penn Continuous Performance Task
 - N = 519 (after QC & exclusions)
-
 ** Task: PCPT
 - Penn Continuous Performance Test
-- 180 trials
 - 1s to respond
 - "Go" on digit/letter (varies by phase)
 - Measure: Acc (corrected for age with quadratic model)
@@ -69,7 +67,7 @@ Lots of quality-control steps throughout
 4. Smoothing
 ** Preproc: Slice-time Correction
 
-#+ATTR_LATEX: :width 3cm
+#+ATTR_LATEX: :height 4cm :float t
 [[./Figures/rollingshuttercar.jpg]]
 - Each fMRI volume is acquired sequentially in slices
 - Volume not acquired simultaneously
@@ -187,6 +185,8 @@ Likelihood Ratio > 10^26
 - DMN-TPN intra- and inter-relationships implicated
 - Shallow vs lagged dysmaturation provides better predictive fit
 * Acknowledgements
+#+LATEX: \stepcounter{subsection}
+** Acknowledgements
 - Chandra Sripada (PI)
 - Mike Angstadt (Research Computer Specialist)
 - Yu Fang (Processing)
