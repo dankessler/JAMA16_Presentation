@@ -129,28 +129,43 @@ Lots of quality-control steps throughout
 - A subset of just 6 components' *deviation scores* do most of the work (R^2 = 0.240)
 - Of these, 5 show vigorous maturational profiles
 - Split half analysis, OLS with all 15 *deviation scores*: R^2 = 0.176
-** Shifting DMN-TPN Architecture Among Maturing Components
-
+#+ATTR_LATEX: :height 3cm :float t
+[[./Figure3.png]]
+** DMN-TPN Shifts in Maturing Components
+#+ATTR_LATEX: :height 7.75cm :float t
+[[./Figure2.png]]
 ** Shallow vs Lagged Dysmaturation and Task Accuracy
-Two Alternative Forms of Dysmaturation
-PIC HERE
+#+ATTR_LATEX: :height 4cm :float t
+[[./eFig7.png]]
 *** Shallow                                                         :BMCOL:
 :PROPERTIES:
 :BEAMER_col: .5
 :END:
+*Shallow Dysmaturation*
+Dysmaturation yields consistent underexpression of components
 *** Lagged                                                          :BMCOL:
 :PROPERTIES:
 :BEAMER_col: .5
 :END:
+*Lagged Dysmaturation*
+Dysmaturation yields comparable, but right-shifted, peak
+*** Strong Evidence for Shallow Dysmaturation over Lagged
+Likelihood Ratio > 10^26
 ** Biomarker of Attention Dysfunction from Network Growth Charting
+- Goal: Binary Classification of Attention Dysfunction
+- Binarize task performance into /low/ and /normal/ performers (split by %ile cutoff)
+- Vary %ile cutoff for binning
+- LOOCV of Logistic Regression, performance assessed with ROC AUC, error bars from permutations
+#+ATTR_LATEX: :height 3cm :float t
+[[./Figure4.png]]
 ** Biomarker of ADHD from Network Growth Charting
+- Goal: Binary Classification of Pseudo ADHD Diagnosis
+- Logistic regression predicting dx using 6 components IDed earlier
+- Model is significant, but effect size weak compared to attention prediction
+- $\chi^2_6 = 13.00; P = 0.043$
 * Discussion
 #+LATEX: \stepcounter{subsection}
-** Unraveling miswired connectomes
-** ICN interplay
-** Dysmaturation Predicts Dysfunction
-** Differential Dysmaturation
-* Conclusions
-#+LATEX: \stepcounter{subsection}
-** Conclusions
-Brain network growth charting predicts attention functioning.
+- Recent review paper calls for developmental approaches to connectomic imaging
+- We link dysmaturation of ICN topology to attention dysfunction
+- DMN-TPN intra- and inter-relationships implicated
+- Shallow vs lagged dysmaturation provides better predictive fit

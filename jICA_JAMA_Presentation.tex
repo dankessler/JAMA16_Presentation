@@ -1,4 +1,4 @@
-% Created 2016-06-07 Tue 18:26
+% Created 2016-06-07 Tue 22:25
 \documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -128,12 +128,12 @@ Lots of quality-control steps throughout
 \item Estimate affine realignment to common volume (e.g. V\(_{\text{0}}\))
 \item Alignment is progressive (rigid body transforms)
 \begin{itemize}
-\item realign V\(_{\text{1}}\) to V\(_{\text{0}}\) using affine matrix A\(_{\text{1}}\)
-\item align V\(_{\text{2}}\) to V\(_{\text{0}}\), initialize solution with A\(_{\text{1}}\)
+\item realign V\(_{\text{1}}\) to V\(_{\text{0}}\) using affine matrix Q\(_{\text{1}}\)
+\item align V\(_{\text{2}}\) to V\(_{\text{0}}\), initialize solution with Q\(_{\text{1}}\)
 \item and so on
 \end{itemize}
-\item Store A\(_{\text{i}}\)
-\item Process A\(_{\text{i}}\)'s to capture summary displacement information for each frame
+\item Store Q\(_{\text{i}}\)
+\item Process Q\(_{\text{i}}\)'s to capture summary displacement information for each frame
 \begin{itemize}
 \item this will be used later in preproccessing
 \end{itemize}
@@ -155,7 +155,7 @@ Lots of quality-control steps throughout
 \begin{frame}[label={sec:orgheadline12}]{Preproc: Smoothing}
 \begin{itemize}
 \item Normalization isn't perfect
-\item Brain's are plastic and diverse even when perfectly aligned anyway
+\item Brains are plastic and diverse even when perfectly aligned anyway
 \item Smooth with Gaussian kernel (3D, 8mm FWHM)
 \end{itemize}
 \end{frame}
@@ -185,7 +185,7 @@ Lots of quality-control steps throughout
 \item estimate with OLS \(X = Y\hat{\beta} + \hat{\epsilon}\)
 \item Reestimate data as \(X^{\dagger} = Y^{\dagger}\hat{\beta}\)
 \item Y\(^{\textdagger{}}\) is ideal design matrix where nuisance fx are flat
-\item Induce eigenvector selection through augmentation: add \(hat{\beta}\) for fx of interest at each edge
+\item Induce eigenvector selection through augmentation: add \(\hat{\beta}\) for fx of interest at each edge
 \end{itemize}
 \end{frame}
 \begin{frame}[label={sec:orgheadline15}]{Independent Components Analysis}
@@ -215,30 +215,69 @@ Lots of quality-control steps throughout
 \label{sec:orgheadline23}
 \stepcounter{subsection}
 \begin{frame}[label={sec:orgheadline18}]{Network Growth Charting to Predict Task Accuracy}
+\begin{itemize}
+\item \alert{Deviation scores} predict accuracy very well (R\(^{\text{2}}\) = 0.287)
+\item A subset of just 6 components' \alert{deviation scores} do most of the work (R\(^{\text{2}}\) = 0.240)
+\item Of these, 5 show vigorous maturational profiles
+\item Split half analysis, OLS with all 15 \alert{deviation scores}: R\(^{\text{2}}\) = 0.176
+\end{itemize}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=3cm]{./Figure3.png}
+\end{figure}
 \end{frame}
-\begin{frame}[label={sec:orgheadline19}]{Shifting DMN-TPN Architecture Among Maturing Components}
+\begin{frame}[label={sec:orgheadline19}]{DMN-TPN Shifts in Maturing Components}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=7.75cm]{./Figure2.png}
+\end{figure}
 \end{frame}
 \begin{frame}[label={sec:orgheadline20}]{Shallow vs Lagged Dysmaturation and Task Accuracy}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=4cm]{./eFig7.png}
+\end{figure}
+\begin{columns}
+\begin{column}{.5\columnwidth}
+\alert{Shallow Dysmaturation}
+Dysmaturation yields consistent underexpression of components
+\end{column}
+\begin{column}{.5\columnwidth}
+\alert{Lagged Dysmaturation}
+Dysmaturation yields comparable, but right-shifted, peak
+\end{column}
+\end{columns}
+\begin{block}{Strong Evidence for Shallow Dysmaturation over Lagged}
+Likelihood Ratio > 10\(^{\text{26}}\)
+\end{block}
 \end{frame}
 \begin{frame}[label={sec:orgheadline21}]{Biomarker of Attention Dysfunction from Network Growth Charting}
+\begin{itemize}
+\item Goal: Binary Classification of Attention Dysfunction
+\item Binarize task performance into \emph{low} and \emph{normal} performers (split by \%ile cutoff)
+\item Vary \%ile cutoff for binning
+\item LOOCV of Logistic Regression, performance assessed with ROC AUC, error bars from permutations
+\end{itemize}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=3cm]{./Figure4.png}
+\end{figure}
 \end{frame}
 \begin{frame}[label={sec:orgheadline22}]{Biomarker of ADHD from Network Growth Charting}
+\begin{itemize}
+\item Goal: Binary Classification of Pseudo ADHD Diagnosis
+\item Logistic regression predicting dx using 6 components IDed earlier
+\item Model is significant, but effect size weak compared to attention prediction
+\item \(\chi^2_6 = 13.00; P = 0.043\)
+\end{itemize}
 \end{frame}
 \section{Discussion}
-\label{sec:orgheadline28}
+\label{sec:orgheadline24}
 \stepcounter{subsection}
-\begin{frame}[label={sec:orgheadline24}]{Unraveling miswired connectomes}
-\end{frame}
-\begin{frame}[label={sec:orgheadline25}]{ICN interplay}
-\end{frame}
-\begin{frame}[label={sec:orgheadline26}]{Dysmaturation Predicts Dysfunction}
-\end{frame}
-\begin{frame}[label={sec:orgheadline27}]{Differential Dysmaturation}
-\end{frame}
-\section{Conclusions}
-\label{sec:orgheadline30}
-\stepcounter{subsection}
-\begin{frame}[label={sec:orgheadline29}]{Conclusions}
-Brain network growth charting predicts attention functioning.
-\end{frame}
+\begin{itemize}
+\item Recent review paper calls for developmental approaches to connectomic imaging
+\item We link dysmaturation of ICN topology to attention dysfunction
+\item DMN-TPN intra- and inter-relationships implicated
+\item Shallow vs lagged dysmaturation provides better predictive fit
+\end{itemize}
 \end{document}
